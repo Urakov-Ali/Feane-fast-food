@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+<!-- css files created by backend dev -->
+  <link href="{% static 'css/style_2.css' %}" rel="stylesheet" type="text/css" />
+
+ <!-- food section -->
+
+  <section class="food_section layout_padding-bottom">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Our Menu
+        </h2>
+      </div>
+
+      <ul class="filters_menu">
+        <li class="active" data-filter="*">All</li>
+        <li data-filter=".burger">Burger</li>
+        <li data-filter=".pizza">Pizza</li>
+        <li data-filter=".pasta">Pasta</li>
+        <li data-filter=".fries">Fries</li>
+      </ul>
+
+      <div class="filters-content">
+        <div class="row grid">
+          {% for product in page %}
+          <div class="col-sm-6 col-lg-4 all burger">
+            <div class="box">
+              <div>
+                <div class="img-box"> 
+                  <img src="{{ product.Image.url }}" alt="">
+                </div>
+                <div class="detail-box">
+                  <h5>
+                    {{ product.Name }}
+                  </h5>
+                  <p id='soz'>
+                    {{ product.Descreption }}
+                  </p>
+
+                  <div class="">
+                    <hr>
+                    {% if user.is_authenticated %}
+
+                    <button style="margin-top: 0px;" data-product ='{{ menu.id }}' data-action ='add' class="btn btn-outline-secondary add-btn update-cart" id ='button Add to Cartadd'>Add to cart </button>
+
+                    <a class="btn btn-outline-success" data-toggle ="modal" data-target ="#exampleModal-{{ foorlop.counter }}">View</a>
+
+                    <h4 style="display: inline-block; float: right;">
+                      <strong>
+                        {{ product.Price }}
+                      </strong> 
+                    </h4>
+                    
+                    {% else %}
+                    <a href="{% url 'login' %}">
+                      <button id="buttonadd"> 
+                        Add to cart 
+                      </button>
+                    </a>
+                    <a class="btn btn-outline-success" data-toggle ="modal" data-target ="#exampleModal-{{ foorlop.counter }}">View</a>
+                    <h4 style="display: inline-block; float: right;">
+                      <strong>
+                        {{ product.Price }}
+                      </strong> 
+                    </h4>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+     <!-- menular tugashi -->
+   <br>
+   <div class="col-md-6">
+    <div class="col-12 my-5"> 
+      <nav aria-label="Page Navigation">
+       {% if page.has_previous %}
+       <a href="{% url 'menu'%}?page={{page.previous_page_number }}"><button type="button">Oldingi sahifa</button></a>
+       {% endif %} | 
+       {% if page.has_next %}
+       <a href="{% url 'menu' %}?page={{page.next_page_number}}"><button type="button">Keyingi sahifa</button></a>
+       {% endif %}
+
+     </nav>
+   </div>
+   <style type="text/css">
+    button{ 
+      margin-top: 15px;
+      border: none;
+      text-transform: uppercase;
+      display: inline-block;
+      padding: 10px 55px;
+      background-color: #ffbe33;
+      color: #ffffff;
+      border-radius: 45px;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+      border: none;
+    }
+  </style>
+
+
+</div>
+</div>
+</section>
+
+{% endblock content %}

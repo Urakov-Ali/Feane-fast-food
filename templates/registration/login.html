@@ -1,0 +1,44 @@
+
+
+{% extends 'base.html'%}
+
+{% block content %}
+
+<!-- book section -->
+<section class="book_section layout_padding">
+	<div class="container">
+		<div class="heading_container">
+			<h2 style="color: white">
+				Get into your profile
+			</h2>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form_container">
+					<form method="post"> {% csrf_token %}
+
+						<p style="color: white">
+
+							<label for="id_username">Username:</label>
+							<input class ="form-control" placeholder="Username" type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
+
+						</p>
+
+						<p style="color: white">
+
+							<label for="id_password">Password:</label>
+							<input class="form-control" placeholder="Password" type="password" name="password" autocomplete="current-password" required="" id="id_password">
+
+						</p>
+
+						<button type="submit">Login</button>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end book section -->
+
+{% endblock content %}
